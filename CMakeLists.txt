@@ -76,17 +76,10 @@ target_include_directories(PaddleInfluence
         "${CMAKE_CURRENT_SOURCE_DIR}/plugin_sdk"
 )
 
-add_custom_command(
-        TARGET PaddleInfluence POST_BUILD
-
-        COMMAND "${CMAKE_COMMAND}" -E make_directory
-        "$<TARGET_FILE_DIR:Arkanoid>/plugins"
-
-        COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-        "$<TARGET_FILE:PaddleInfluence>"
-        "$<TARGET_FILE_DIR:Arkanoid>/plugins/$<TARGET_FILE_NAME:PaddleInfluence>"
-
-        VERBATIM
+set_target_properties(PaddleInfluence PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:Arkanoid>/plugins"
+        LIBRARY_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:Arkanoid>/plugins"
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/plugin_artifacts"
 )
 
 
@@ -100,17 +93,10 @@ target_include_directories(BonusBrick
         "${CMAKE_CURRENT_SOURCE_DIR}/plugin_sdk"
 )
 
-add_custom_command(
-        TARGET BonusBrick POST_BUILD
-
-        COMMAND "${CMAKE_COMMAND}" -E make_directory
-        "$<TARGET_FILE_DIR:Arkanoid>/plugins"
-
-        COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-        "$<TARGET_FILE:BonusBrick>"
-        "$<TARGET_FILE_DIR:Arkanoid>/plugins/$<TARGET_FILE_NAME:BonusBrick>"
-
-        VERBATIM
+set_target_properties(BonusBrick PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:Arkanoid>/plugins"
+        LIBRARY_OUTPUT_DIRECTORY "$<TARGET_FILE_DIR:Arkanoid>/plugins"
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/plugin_artifacts"
 )
 
 add_dependencies(
