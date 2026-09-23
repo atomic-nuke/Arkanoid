@@ -35,21 +35,31 @@ target_link_libraries(Arkanoid
         nlohmann_json::nlohmann_json
 )
 
+target_include_directories(Arkanoid
+        PRIVATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/plugin_sdk"
+)
+
 configure_file(
         "${CMAKE_CURRENT_SOURCE_DIR}/config.json"
         "${CMAKE_CURRENT_BINARY_DIR}/config.json"
         COPYONLY
 )
 
-target_include_directories(Arkanoid
-        PRIVATE
-        "${CMAKE_CURRENT_SOURCE_DIR}/plugin_sdk"
+add_custom_command(
+        TARGET Arkanoid POST_BUILD
+
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/config.json"
+        "$<TARGET_FILE_DIR:Arkanoid>/config.json"
+
+        VERBATIM
 )
 
 if (WIN32)
     add_custom_command(
             TARGET Arkanoid POST_BUILD
-            COMMAND "${CMAKE_COMMAND}" -E copy
+            COMMAND "${CMAKE_COMMAND}" -E copy_if_different
             $<TARGET_FILE:SDL3::SDL3-shared>
             $<TARGET_FILE_DIR:Arkanoid>
             VERBATIM
