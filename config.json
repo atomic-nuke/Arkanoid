@@ -1,0 +1,58 @@
+{
+  "window": {
+    "width": 1280,
+    "height": 720
+  },
+  "paddle": {
+    "width": 160.0,
+    "height": 20.0,
+    "speed": 700.0,
+    "bottomOffset": 50.0,
+    "influence": 0.35
+  },
+  "ball": {
+    "radius": 8.0,
+    "speed": 450.0,
+    "count": 3
+  },
+  "bricks": {
+    "columns": 10,
+    "width": 100.0,
+    "height": 30.0,
+    "spacing": 8.0,
+    "topOffset": 80.0,
+    "types": [
+      {
+        "rows": 2,
+        "score": 20,
+        "color": [
+          220,
+          70,
+          70
+        ]
+      },
+      {
+        "rows": 3,
+        "score": 10,
+        "color": [
+          70,
+          140,
+          220
+        ]
+      }
+    ]
+  },
+  "physics": {
+    "fixedUpdateRate": 120.0
+  },
+  "plugins": [
+    {
+      "library": "plugins/PaddleInfluence.dll",
+      "enabled": true
+    },
+    {
+      "library": "plugins/BonusBrick.dll",
+      "enabled": false
+    }
+  ]
+}
